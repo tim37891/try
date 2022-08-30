@@ -6,6 +6,6 @@ rm Mambaforge-Linux-x86_64.sh
 ~/mambaforge/bin/mamba install --quiet --yes \
     'gnupg' \
     'git' \
-    'gh' \
+    'gh'
 ~/mambaforge/bin/mamba init bash
 exec bash
