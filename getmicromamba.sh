@@ -1,4 +1,5 @@
 #!/bin/bash
 curl micro.mamba.pm/install.sh | bash
+# Restart
 micromamba activate
-micromamba install -c condaforge gh git gnupg
+micromamba install -c conda-forge gh git gnupg
