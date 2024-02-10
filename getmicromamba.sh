@@ -1,7 +1,6 @@
 #!/bin/bash
-curl micro.mamba.pm/install.sh | bash
+"${SHELL}" <(curl -L micro.mamba.pm/install.sh)
 echo "micromamba activate" >> ~/.bashrc
 # Restart
-exec bash
-micromamba install -c conda-forge mamba
-mamba install --yes --quiet -c conda-forge gh git gnupg
+source ~/.bashrc
+micromamba install -c conda-forge gh git gnupg
