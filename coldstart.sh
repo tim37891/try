@@ -10,10 +10,12 @@ sudo usermod -aG sudo ${NEW_USER_NAME}
 sudo su ${NEW_USER_NAME}
 ### gpg setup
 mkdir -p ~/.gnupg
+chown -R $(whoami) ~/.gnupg/
+chmod 600 ~/.gnupg/*
+chmod 700 ~/.gnupg
 echo "pinentry-program /usr/bin/pinentry-tty" >> ~/.gnupg/gpg-agent.conf
 gpg-connect-agent reloadagent /bye
 ## git setup
-
-
-
-
+cd ~
+git clone https://github.com/tim37891/try.git
+gpg --no-symkey -c $2
