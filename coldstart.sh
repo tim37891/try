@@ -3,7 +3,7 @@
 # system update
 sudo apt update -y
 sudo apt dist-upgrade -y
-sudo apt install -y git gnupg pinentry-tty
+sudo apt install -y git gnupg pinentry-tty openssh-client openssh-server
 #####################################################################################
 # new user setup
 NEW_USER_NAME=$1
