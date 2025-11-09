@@ -7,13 +7,13 @@ sudo apt install -y git gnupg pinentry-tty
 NEW_USER_NAME=$1
 sudo adduser --disabled-password --gecos "" ${NEW_USER_NAME}
 sudo usermod -aG sudo ${NEW_USER_NAME}
-sudo su ${NEW_USER_NAME}
+sudo su --login --pty ${NEW_USER_NAME}
 ### gpg setup
 mkdir -p ~/.gnupg
+echo "pinentry-program /usr/bin/pinentry-tty" >> ~/.gnupg/gpg-agent.conf
 chown -R $(whoami) ~/.gnupg/
 chmod 600 ~/.gnupg/*
 chmod 700 ~/.gnupg
-echo "pinentry-program /usr/bin/pinentry-tty" >> ~/.gnupg/gpg-agent.conf
 gpg-connect-agent reloadagent /bye
 ## git setup
 cd ~
