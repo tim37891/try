@@ -1,9 +1,7 @@
 #!/bin/bash
 #####################################################################################
-# system update
-sudo apt update -y
-sudo apt dist-upgrade -y
-sudo apt install -y git gnupg pinentry-tty openssh-client openssh-server
+# cd ~
+# git clone https://github.com/tim37891/try.git
 #####################################################################################
 # gpg setup
 mkdir -p ~/.gnupg
