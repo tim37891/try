@@ -9,6 +9,6 @@
 NEW_USER_NAME=$1
 sudo adduser --disabled-password --gecos "" ${NEW_USER_NAME}
 sudo usermod -aG sudo ${NEW_USER_NAME}
-sudo echo "$NEW_USER_NAME  ALL=(ALL:ALL) ALL" >> /etc/sudoers
+sudo echo "$NEW_USER_NAME  ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/init_${NEW_USER_NAME}
 sudo su --login --pty ${NEW_USER_NAME}
 #####################################################################################
