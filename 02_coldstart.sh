@@ -3,6 +3,12 @@
 # cd ~
 # git clone https://github.com/tim37891/try.git
 #####################################################################################
+# system update
+#####################################################################################
+sudo apt update -y
+sudo apt dist-upgrade -y
+sudo apt install -y gnupg pinentry-tty openssh-client openssh-server
+#####################################################################################
 # gpg setup
 mkdir -p ~/.gnupg
 echo "pinentry-program /usr/bin/pinentry-tty" >> ~/.gnupg/gpg-agent.conf
