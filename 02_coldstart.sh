@@ -20,6 +20,7 @@ gpg-connect-agent reloadagent /bye
 # git setup
 eval "$(ssh-agent -s)"
 gpg --no-symkey -d $1 | ssh-add -
-ssh -T git@github.com
+ssh -y -T git@github.com
+cd ~
 git clone git@github.com:tim37891/$2.git
 #####################################################################################
