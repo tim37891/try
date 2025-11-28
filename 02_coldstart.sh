@@ -9,7 +9,7 @@
 #####################################################################################
 sudo apt update -y
 sudo apt dist-upgrade -y
-sudo apt install -y gnupg pinentry-tty
+sudo apt install -y git gnupg pinentry-tty
 #####################################################################################
 # gpg setup
 mkdir -p ~/.gnupg
