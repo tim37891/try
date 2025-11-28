@@ -9,7 +9,7 @@
 #####################################################################################
 sudo apt update -y
 sudo apt dist-upgrade -y
-sudo apt install -y gnupg pinentry-tty openssh-client openssh-server
+sudo apt install -y gnupg pinentry-tty
 #####################################################################################
 # gpg setup
 mkdir -p ~/.gnupg
@@ -23,6 +23,8 @@ gpg-connect-agent reloadagent /bye
 eval "$(ssh-agent -s)"
 gpg --no-symkey -d $1 | ssh-add -
 ssh -y -T git@github.com
-cd ~
+mkdir -p ~/src
+cd ~/src
 git clone git@github.com:tim37891/$2.git
+cd ~
 #####################################################################################
