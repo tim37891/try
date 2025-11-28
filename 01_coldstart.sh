@@ -6,7 +6,7 @@
 #####################################################################################
 # new user setup
 #####################################################################################
-NEW_USER_NAME=$1
+read -e -p "Please enter the username for your new user: " NEW_USER_NAME
 sudo adduser --disabled-password --gecos "" ${NEW_USER_NAME}
 sudo usermod -aG sudo ${NEW_USER_NAME}
 echo "$NEW_USER_NAME  ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/init_${NEW_USER_NAME} > /dev/null
