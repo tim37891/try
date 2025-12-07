@@ -19,8 +19,6 @@ chmod 700 ~/.gnupg
 gpg-connect-agent reloadagent /bye
 #####################################################################################
 # git setup
-#eval "$(ssh-agent -s)"
-#gpg --no-symkey -d $1 | ssh-add -
 gpg --no-symkey -d $1 >>  ~/.ssh/gh_unlock
 cat << EOF >> ~/.ssh/config
 Host github.com
