@@ -1,5 +1,6 @@
 #!/bin/bash
 #####################################################################################
+# Parameters 1: gpg undo, 2: git repo
 # sudo apt update -y
 # sudo apt install -y git
 # cd ~
