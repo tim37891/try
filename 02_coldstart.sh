@@ -19,9 +19,10 @@ chmod 700 ~/.gnupg
 gpg-connect-agent reloadagent /bye
 #####################################################################################
 # git setup
+#eval "$(ssh-agent -s)"
+#gpg --no-symkey -d $1 | ssh-add -
 gpg --no-symkey -d $1 >>  ~/.ssh/unlock
-chmod 600 ~/.ssh/unlock
-cat << 'EOF' >> ~/.ssh/config
+cat << 'EOF' >> /.ssh/config
 Host github.com
   User git
   IdentityFile ~/.ssh/unlock
