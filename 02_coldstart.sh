@@ -6,7 +6,6 @@
 # git clone https://github.com/tim37891/try.git
 #####################################################################################
 # system update
-#####################################################################################
 sudo apt update -y
 sudo apt dist-upgrade -y
 sudo apt install -y git gnupg pinentry-tty
