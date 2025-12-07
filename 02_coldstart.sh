@@ -21,11 +21,11 @@ gpg-connect-agent reloadagent /bye
 # git setup
 #eval "$(ssh-agent -s)"
 #gpg --no-symkey -d $1 | ssh-add -
-gpg --no-symkey -d $1 >>  ~/.ssh/unlock
-cat << 'EOF' >> /.ssh/config
+gpg --no-symkey -d $1 >>  ~/.ssh/gh_unlock
+cat << EOF >> ~/.ssh/config
 Host github.com
   User git
-  IdentityFile ~/.ssh/unlock
+  IdentityFile ~/.ssh/gh_unlock
 EOF
 ssh -y -T git@github.com
 mkdir -p ~/src
