@@ -1,5 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #####################################################################################
+# VPS Security Setup — Ubuntu 24.04 (Netcup)
+# Assuming sudo no passwd user
+#####################################################################################
+# sudo apt-get update -qq
+# sudo apt-get install y -qq git
+# cd ~
+# git clone https://github.com/tim37891/try.git
+# cd ~/try
+# bash 02_coldstart.sh
+#####################################################################################
+
+
 # Parameters 1: gpg undo, 2: git repo
 # sudo apt update -y
 # sudo apt install -y git

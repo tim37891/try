@@ -1,8 +1,22 @@
-#!/bin/bash
-# sudo apt update -y
-# sudo apt install -y git
+#!/usr/bin/env bash
+#####################################################################################
+# sudo apt-get update -qq
+# sudo apt-get install y -qq git
 # cd ~
 # git clone https://github.com/tim37891/try.git
+# cd ~/try
+# bash 01_coldstart.sh
+#####################################################################################
+#####################################################################################
+#####################################################################################
+# VPS Security Setup — Ubuntu 24.04 (Netcup)
+# Assuming root or sudo no passwd user
+sudo -l &>/dev/null || { echo "No sudo access."; exit 1; }
+#####################################################################################
+set -euo pipefail
+TIMEZONE="America/New_York"
+# TIMEZONE="America/Los_Angeles"
+sudo timedatectl set-timezone "$TIMEZONE"
 #####################################################################################
 # new user setup
 #####################################################################################
