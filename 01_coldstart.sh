@@ -44,5 +44,6 @@ echo "  ✔ Username accepted: $NEW_USER_NAME"
 sudo adduser --disabled-password --gecos "" "$NEW_USER_NAME"
 sudo usermod -aG sudo "$NEW_USER_NAME"
 echo "$NEW_USER_NAME ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/"$NEW_USER_NAME" > /dev/null
-sudo su --login --pty ${NEW_USER_NAME}
+sudo su --login --pty "$NEW_USER_NAME"
+sudo chmod 440 /etc/sudoers.d/"$NEW_USER_NAME"
 #####################################################################################
