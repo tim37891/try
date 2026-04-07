@@ -22,6 +22,8 @@ mkdir -p ~/.gnupg
 chmod 700 ~/.gnupg
 echo "pinentry-program /usr/bin/pinentry-tty" > ~/.gnupg/gpg-agent.conf
 chown -R "$USER:$USER" ~/.gnupg/
+find ~/.gnupg -type f -exec chmod 600 {} \;
+find ~/.gnupg -type d -exec chmod 700 {} \;
 gpg-connect-agent reloadagent /bye
 #####################################################################################
 # ssh setup
