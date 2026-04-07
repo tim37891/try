@@ -28,7 +28,7 @@ gpg-connect-agent reloadagent /bye
 #####################################################################################
 # ssh setup
 mkdir -p ~/.ssh
-gpg --no-symkey -d $1 >>  ~/.ssh/gh_unlock
+gpg --no-symkey -d $1 >  ~/.ssh/gh_unlock
 cat << EOF >> ~/.ssh/config
 Host github.com
   User git
