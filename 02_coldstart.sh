@@ -22,20 +22,19 @@ mkdir -p ~/.gnupg
 chmod 700 ~/.gnupg
 echo "pinentry-program /usr/bin/pinentry-tty" > ~/.gnupg/gpg-agent.conf
 chown -R "$USER:$USER" ~/.gnupg/
-find ~/.gnupg -type f -exec chmod 600 {} \;
-find ~/.gnupg -type d -exec chmod 700 {} \;
 gpg-connect-agent reloadagent /bye
 #####################################################################################
 # ssh setup
 mkdir -p ~/.ssh
+chmod 700 ~/.ssh
 gpg --no-symkey -d $1 >  ~/.ssh/gh_unlock
 cat << EOF >> ~/.ssh/config
 Host github.com
   User git
   IdentityFile ~/.ssh/gh_unlock
 EOF
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/*
+find ~/.ssh -type f -exec chmod 600 {} \;
+find ~/.ssh -type d -exec chmod 700 {} \;
 #####################################################################################
 # git use
 ssh -y -T git@github.com
