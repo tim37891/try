@@ -29,11 +29,24 @@ gpg-connect-agent reloadagent /bye
 # ssh setup
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
-gpg --no-symkey -d $1 >  ~/.ssh/gh_unlock
-cat << EOF >> ~/.ssh/config
+gpg --no-symkey -d $1 >  ~/.ssh/github
+####################################################################################
+if ! grep -q "Host github.com" ~/.ssh/config 2>/dev/null; then
+    cat >> ~/.ssh/config << EOF
+
 Host github.com
   User git
   IdentityFile ~/.ssh/gh_unlock
+  IdentitiesOnly yes
+  AddKeysToAgent yes
+EOF
+    chmod 600 ~/.ssh/config
+fi
+##################################################################################################3
+cat << EOF >> ~/.ssh/config
+Host github.com
+  User git
+  IdentityFile ~/.ssh/github
 EOF
 find ~/.ssh -type f -exec chmod 600 {} \;
 find ~/.ssh -type d -exec chmod 700 {} \;
