@@ -1,34 +1,29 @@
 #!/usr/bin/env bash
 #####################################################################################
-# VPS Security Setup — Ubuntu 24.04 (Netcup)
-# Assuming sudo no passwd user
-#####################################################################################
-# sudo apt-get update -qq
-# sudo apt-get install y -qq git
-# cd ~
 # git clone https://github.com/tim37891/try.git
 # cd ~/try
 # bash 02_coldstart.sh
 #####################################################################################
-
-
 # Parameters 1: gpg undo, 2: git repo
-# sudo apt update -y
-# sudo apt install -y git
-# cd ~
-# git clone https://github.com/tim37891/try.git
+#####################################################################################
+# VPS Security Setup — Ubuntu 24.04 (Netcup)
+# Assuming root or sudo access
+sudo -l &>/dev/null || { echo "No sudo access."; exit 1; }
+set -euo pipefail
 #####################################################################################
 # system update
-sudo apt update -y
-sudo apt dist-upgrade -y
-sudo apt install -y git gnupg pinentry-tty openssh-client openssh-server curl
+sudo apt-get update -y -qq
+sudo apt-get upgrade -y -qq 
+sudo apt-get autoremove -y -qq
+sudo apt-get install -y -qq git gnupg pinentry-tty openssh-client openssh-server curl
 #####################################################################################
 # gpg setup
 mkdir -p ~/.gnupg
-echo "pinentry-program /usr/bin/pinentry-tty" >> ~/.gnupg/gpg-agent.conf
-chown -R $(whoami) ~/.gnupg/
-chmod 600 ~/.gnupg/*
 chmod 700 ~/.gnupg
+echo "pinentry-program /usr/bin/pinentry-tty" > ~/.gnupg/gpg-agent.conf
+chown -R "$USER:$USER" ~/.gnupg/
+find ~/.gnupg -type f -exec chmod 600 {} \;
+find ~/.gnupg -type d -exec chmod 700 {} \;
 gpg-connect-agent reloadagent /bye
 #####################################################################################
 # ssh setup
