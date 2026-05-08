@@ -4,6 +4,12 @@
 # cd ~/try
 # bash 02_coldstart.sh
 #####################################################################################
+if [ "$#" -ne 2 ]; then
+  echo "Usage: $0 <gpg file> <repo>"
+  exit 1
+fi
+GPGFILE=$1
+REPON=$2
 # Parameters 1: gpg undo, 2: git repo
 #####################################################################################
 # VPS Security Setup — Ubuntu 24.04 (Netcup)
@@ -29,7 +35,7 @@ gpg-connect-agent reloadagent /bye
 # ssh setup
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
-gpg --no-symkey -d $1 >  ~/.ssh/github
+gpg --no-symkey -d $GPGFILE >  ~/.ssh/github
 ####################################################################################
 if ! grep -q "Host github.com" ~/.ssh/config 2>/dev/null; then
     cat >> ~/.ssh/config << EOF
@@ -46,6 +52,12 @@ fi
 cat << EOF >> ~/.ssh/config
 Host github.com
   User git
+  IdentityFile ~/.ssh/gh_unlock
+  IdentitiesOnly yes
+  AddKeysToAgent yes
+
+Host github.com
+  User git
   IdentityFile ~/.ssh/github
 EOF
 find ~/.ssh -type f -exec chmod 600 {} \;
@@ -56,5 +68,5 @@ find ~/.ssh -type d -exec chmod 700 {} \;
 #ssh -y -T git@github.com
 mkdir -p ~/src
 cd ~/src
-git clone git@github.com:tim37891/$2.git
+git clone git@github.com:tim37891/$REPON.git
 #####################################################################################
