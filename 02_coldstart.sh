@@ -10,9 +10,8 @@ if [ "$#" -ne 2 ]; then
 fi
 GPGF=$1
 REPON=$2
-# Parameters 1: gpg undo, 2: git repo
 #####################################################################################
-# VPS Security Setup — Ubuntu 24.04 (Netcup)
+# VPS Security Setup — Setup Git
 # Assuming root or sudo access
 sudo -l &>/dev/null || { echo "No sudo access."; exit 1; }
 set -euo pipefail
