@@ -46,4 +46,9 @@ sudo usermod -aG sudo "$NEW_USER_NAME"
 echo "$NEW_USER_NAME ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/"$NEW_USER_NAME" > /dev/null
 sudo chmod 440 /etc/sudoers.d/"$NEW_USER_NAME"
 #####################################################################################
+sudo -u "$NEW_USER_NAME" bash <<'EOF'
+    cd ~
+    git clone https://github.com/tim37891/try.git
+    echo "cd try;02_coldstart.sh"
+EOF
 sudo su --login --pty "$NEW_USER_NAME"
