@@ -5,10 +5,10 @@
 # bash 02_coldstart.sh
 #####################################################################################
 if [ "$#" -ne 2 ]; then
-  echo "Usage: $0 <gpg file> <repo>"
+  echo "Usage: $0 <gpg file> <repo name>"
   exit 1
 fi
-GPGFILE=$1
+GPGF=$1
 REPON=$2
 # Parameters 1: gpg undo, 2: git repo
 #####################################################################################
