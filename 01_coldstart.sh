@@ -50,6 +50,6 @@ sudo -u "$NEW_USER_NAME" bash <<'EOF'
     cd ~
     git clone https://github.com/tim37891/try.git
 EOF
-echo "Run:cd try;bash 02_coldstart.sh"
+echo -e "\n❯ cd try;bash 02_coldstart.sh"
 sudo su --login --pty "$NEW_USER_NAME"
 #####################################################################################
