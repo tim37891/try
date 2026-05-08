@@ -49,7 +49,7 @@ sudo chmod 440 /etc/sudoers.d/"$NEW_USER_NAME"
 sudo -u "$NEW_USER_NAME" bash <<'EOF'
     cd ~
     git clone https://github.com/tim37891/try.git
-    echo "Run:cd try;02_coldstart.sh"
 EOF
+echo "Run:cd try;bash 02_coldstart.sh"
 sudo su --login --pty "$NEW_USER_NAME"
 #####################################################################################
