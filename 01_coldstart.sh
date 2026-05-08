@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #####################################################################################
 # sudo apt-get update -qq
-# sudo apt-get install y -qq git
+# sudo apt-get install -y -qq git
 # cd ~
 # git clone https://github.com/tim37891/try.git
 # cd ~/try
