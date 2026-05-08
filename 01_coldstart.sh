@@ -52,3 +52,4 @@ sudo -u "$NEW_USER_NAME" bash <<'EOF'
     echo "Run:cd try;02_coldstart.sh"
 EOF
 sudo su --login --pty "$NEW_USER_NAME"
+#####################################################################################
