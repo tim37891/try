@@ -56,3 +56,4 @@ mkdir -p ~/src
 cd ~/src
 git clone git@github.com:tim37891/$REPON.git
 #####################################################################################
+echo -e "\n❯ cd ~/src/$REPON/coldstart;bash 03_coldstart.sh"
