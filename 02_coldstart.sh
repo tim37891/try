@@ -34,6 +34,7 @@ gpg-connect-agent reloadagent /bye
 # ssh setup
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
+read -p "-= [ Press Enter to continue ] =-"
 gpg --no-symkey -d $GPGF>  ~/.ssh/github
 ####################################################################################
 if ! grep -q "Host github.com" ~/.ssh/config 2>/dev/null; then
