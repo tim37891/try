@@ -55,6 +55,6 @@ find ~/.ssh -type d -exec chmod 700 {} \;
 #ssh -y -T git@github.com
 mkdir -p ~/src
 cd ~/src
-git clone -o 'UserKnownHostsFile=/dev/null' -o StrictHostKeyChecking=no git@github.com:tim37891/$REPON.git
+git clone git@github.com:tim37891/$REPON.git
 #####################################################################################
 echo -e "\n❯ cd ~/src/$REPON/coldstart;bash 03_coldstart.sh"
