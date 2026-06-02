@@ -11,14 +11,14 @@ fi
 GPGF=$1
 REPON=$2
 #####################################################################################
-# VPS Security Setup — Setup Git
+# Setup Git
 # Assuming root or sudo access
 sudo -l &>/dev/null || { echo "No sudo access."; exit 1; }
 set -euo pipefail
 #####################################################################################
 # system update
 sudo apt-get update -y -qq
-sudo apt-get upgrade -y -qq 
+sudo apt-get upgrade -y -qq
 sudo apt-get autoremove -y -qq
 sudo apt-get install -y -qq git gnupg pinentry-tty openssh-client openssh-server curl
 #####################################################################################
