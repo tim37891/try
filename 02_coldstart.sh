@@ -20,7 +20,23 @@ set -euo pipefail
 sudo apt-get update -y -qq
 sudo apt-get upgrade -y -qq
 sudo apt-get autoremove -y -qq
-sudo apt-get install -y -qq git gnupg pinentry-tty openssh-client openssh-server curl
+sudo apt-get install -y -qq git gnupg pinentry-tty openssh-client openssh-server curl zsh fzf
+#################################################
+# Shell Config
+#################################################
+# zsh setup
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+sudo chsh -s $(which zsh) $USER
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+sed -i 's/^plugins=(.*)$/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
+# FZF
+grep -q "key-bindings.zsh" ~/.zshrc || cat >> ~/.zshrc <<'EOF'
+
+# fzf
+[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
+EOF
 #####################################################################################
 # gpg setup
 mkdir -p ~/.gnupg
@@ -56,5 +72,7 @@ find ~/.ssh -type d -exec chmod 700 {} \;
 #mkdir -p ~/src
 cd ~/src
 git clone git@github.com:tim37891/$REPON.git
+rm -rf try
+git clone git@github.com:tim37891/try.git
 #####################################################################################
 echo -e "\n❯ cd ~/src/$REPON/coldstart;bash 03_coldstart.sh"
