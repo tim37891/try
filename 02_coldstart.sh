@@ -22,15 +22,15 @@ sudo apt-get upgrade -y -qq
 sudo apt-get autoremove -y -qq
 sudo apt-get install -y -qq git gnupg pinentry-tty openssh-client openssh-server curl zsh fzf
 #################################################
-# Shell Config
-#################################################
 # zsh setup
+#################################################
+# oh my zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 sudo chsh -s $(which zsh) $USER
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 sed -i 's/^plugins=(.*)$/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
-# FZF
+# fzf
 grep -q "key-bindings.zsh" ~/.zshrc || cat >> ~/.zshrc <<'EOF'
 
 # fzf
