@@ -47,7 +47,7 @@ find ~/.gnupg -type f -exec chmod 600 {} \;
 find ~/.gnupg -type d -exec chmod 700 {} \;
 gpg-connect-agent reloadagent /bye
 #######################################################################################
-# gh/git setup
+# gh install and git setup
 # #########
 (type -p wget >/dev/null || (sudo apt-get update -y -qq && sudo apt-get install wget -y -qq)) \
 	&& sudo mkdir -p -m 755 /etc/apt/keyrings \
@@ -58,7 +58,7 @@ gpg-connect-agent reloadagent /bye
 	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
 	&& sudo apt-get update -y -qq \
 	&& sudo apt-get install gh -y -qq
-gpg --no-symkey -d $GPGF | gh auth login --with-token
+TOKEN=$(gpg --pinentry-mode loopback --no-symkey-cache -d file.md) && echo "$TOKEN" | gh auth login --with-token
 gh auth setup-git
 #######################################################################################
 #######################################################################################
