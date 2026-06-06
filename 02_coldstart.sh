@@ -11,7 +11,6 @@ fi
 GPGF=$1
 REPON=$2
 #####################################################################################
-# Setup Git
 # Assuming root or sudo access
 sudo -l &>/dev/null || { echo "No sudo access."; exit 1; }
 set -euo pipefail
@@ -39,6 +38,7 @@ grep -q "key-bindings.zsh" ~/.zshrc || cat >> ~/.zshrc <<'EOF'
 EOF
 #####################################################################################
 # gpg setup
+# ##########
 mkdir -p ~/.gnupg
 chmod 700 ~/.gnupg
 echo "pinentry-program /usr/bin/pinentry-tty" > ~/.gnupg/gpg-agent.conf
@@ -46,33 +46,49 @@ chown -R "$USER:$USER" ~/.gnupg/
 find ~/.gnupg -type f -exec chmod 600 {} \;
 find ~/.gnupg -type d -exec chmod 700 {} \;
 gpg-connect-agent reloadagent /bye
-#####################################################################################
-# ssh setup
-mkdir -p ~/.ssh
-chmod 700 ~/.ssh
-read -p "-= [ Press Enter to continue ] =-"
-gpg --no-symkey -d $GPGF>  ~/.ssh/github
-####################################################################################
-if ! grep -q "Host github.com" ~/.ssh/config 2>/dev/null; then
-    cat >> ~/.ssh/config << EOF
+#######################################################################################
+# gh/git setup
+# #########
+(type -p wget >/dev/null || (sudo apt-get update -y -qq && sudo apt-get install wget -y -qq)) \
+	&& sudo mkdir -p -m 755 /etc/apt/keyrings \
+	&& out=$(mktemp) && wget -nv -O$out https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+	&& cat $out | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+	&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+	&& sudo mkdir -p -m 755 /etc/apt/sources.list.d \
+	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+	&& sudo apt-get update -y -qq \
+	&& sudo apt-get install gh -y -qq
+gpg --no-symkey -d $GPGF | gh auth login --with-token
+gh auth setup-git
+#######################################################################################
+#######################################################################################
+# #####################################################################################
+# # ssh setup
+# mkdir -p ~/.ssh
+# chmod 700 ~/.ssh
+# read -p "-= [ Press Enter to continue ] =-"
+# gpg --no-symkey -d $GPGF>  ~/.ssh/github
+# ####################################################################################
+# if ! grep -q "Host github.com" ~/.ssh/config 2>/dev/null; then
+#     cat >> ~/.ssh/config << EOF
 
-Host github.com
-  User git
-  IdentityFile ~/.ssh/github
-  IdentitiesOnly yes
-  AddKeysToAgent yes
-EOF
-fi
-find ~/.ssh -type f -exec chmod 600 {} \;
-find ~/.ssh -type d -exec chmod 700 {} \;
-###################################################################################################
-# git use
-###############################################################################################
-#ssh -y -T git@github.com
-#mkdir -p ~/src
-cd ~/src
-git clone git@github.com:tim37891/$REPON.git
-rm -rf try
-git clone git@github.com:tim37891/try.git
-#####################################################################################
-echo -e "\n❯ cd ~/src/$REPON/coldstart;bash 03_coldstart.sh"
+# Host github.com
+#   User git
+#   IdentityFile ~/.ssh/github
+#   IdentitiesOnly yes
+#   AddKeysToAgent yes
+# EOF
+# fi
+# find ~/.ssh -type f -exec chmod 600 {} \;
+# find ~/.ssh -type d -exec chmod 700 {} \;
+# ###################################################################################################
+# # git use
+# ###############################################################################################
+# #ssh -y -T git@github.com
+# #mkdir -p ~/src
+# cd ~/src
+# git clone git@github.com:tim37891/$REPON.git
+# rm -rf try
+# git clone git@github.com:tim37891/try.git
+# #####################################################################################
+# echo -e "\n❯ cd ~/src/$REPON/coldstart;bash 03_coldstart.sh"
