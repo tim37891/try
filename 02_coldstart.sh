@@ -91,4 +91,4 @@ git clone https://github.com/tim37891/$REPON.git
 rm -rf try
 git clone https://github.com/tim37891/try.git
 # #####################################################################################
-# echo -e "\n❯ cd ~/src/$REPON/coldstart;bash 03_coldstart.sh"
+echo -e "\n❯ cd ~/src/$REPON;bash 03_coldstart.sh"
