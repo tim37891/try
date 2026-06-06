@@ -86,8 +86,8 @@ gh auth setup-git
 # ###############################################################################################
 # #ssh -y -T git@github.com
 # #mkdir -p ~/src
-# cd ~/src
-# git clone git@github.com:tim37891/$REPON.git
+cd ~/src
+git clone https://github.com/tim37891/$REPON.git
 # rm -rf try
 # git clone git@github.com:tim37891/try.git
 # #####################################################################################
