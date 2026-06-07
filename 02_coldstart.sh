@@ -36,6 +36,24 @@ grep -q "key-bindings.zsh" ~/.zshrc || cat >> ~/.zshrc <<'EOF'
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
 EOF
+################################################
+# Pixi
+################################################
+curl -fsSL https://pixi.sh/install.sh | zsh
+export PATH="${HOME}/.pixi/bin:${PATH}"
+pixi config set shell.change-ps1 false --global
+# direnv
+pixi global install direnv
+mkdir -p ~/.config/direnv
+touch ~/.config/direnv/direnv.toml
+echo 'export DIRENV_LOG_FORMAT=' >> ~/.zshrc
+echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
+################################################
+# Starship
+################################################
+curl -sS https://starship.rs/install.sh | sudo sh -s -- --yes
+echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+starship preset plain-text-symbols -o ~/.config/starship.toml
 #####################################################################################
 # gpg setup
 # ##########
