@@ -17,44 +17,7 @@ set -euo pipefail
 #####################################################################################
 # system update
 sudo apt-get update -y -qq
-sudo apt-get upgrade -y -qq
-sudo apt-get autoremove -y -qq
-sudo apt-get install -y -qq git gnupg pinentry-tty openssh-client openssh-server curl zsh fzf
-#################################################
-# zsh setup
-#################################################
-# oh my zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-sudo chsh -s $(which zsh) $USER
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-sed -i 's/^plugins=(.*)$/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
-# fzf
-grep -q "key-bindings.zsh" ~/.zshrc || cat >> ~/.zshrc <<'EOF'
-
-# fzf
-[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
-[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
-EOF
-################################################
-# Pixi
-################################################
-curl -fsSL https://pixi.sh/install.sh | sh
-export PATH="${HOME}/.pixi/bin:${PATH}"
-echo 'export PATH="${HOME}/.pixi/bin:${PATH}"' >> ~/.zshrc
-pixi config set shell.change-ps1 false --global
-# direnv
-pixi global install direnv
-mkdir -p ~/.config/direnv
-touch ~/.config/direnv/direnv.toml
-echo 'export DIRENV_LOG_FORMAT=' >> ~/.zshrc
-echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
-################################################
-# Starship
-################################################
-curl -sS https://starship.rs/install.sh | sudo sh -s -- --yes
-echo 'eval "$(starship init zsh)"' >> ~/.zshrc
-starship preset plain-text-symbols -o ~/.config/starship.toml
+sudo apt-get install -y -qq gnupg pinentry-tty
 #####################################################################################
 # gpg setup
 # ##########
@@ -82,31 +45,6 @@ read -p "-= [ Press Enter to continue ] =-"
 TOKEN=$(gpg --pinentry-mode loopback --no-symkey-cache -d "$GPGF") && echo "$TOKEN" | gh auth login --with-token
 gh auth setup-git
 #######################################################################################
-#######################################################################################
-# #####################################################################################
-# # ssh setup
-# mkdir -p ~/.ssh
-# chmod 700 ~/.ssh
-# read -p "-= [ Press Enter to continue ] =-"
-# gpg --no-symkey -d $GPGF>  ~/.ssh/github
-# ####################################################################################
-# if ! grep -q "Host github.com" ~/.ssh/config 2>/dev/null; then
-#     cat >> ~/.ssh/config << EOF
-
-# Host github.com
-#   User git
-#   IdentityFile ~/.ssh/github
-#   IdentitiesOnly yes
-#   AddKeysToAgent yes
-# EOF
-# fi
-# find ~/.ssh -type f -exec chmod 600 {} \;
-# find ~/.ssh -type d -exec chmod 700 {} \;
-# ###################################################################################################
-# # git use
-# ###############################################################################################
-# #ssh -y -T git@github.com
-# #mkdir -p ~/src
 cd ~/src
 git clone https://github.com/tim37891/$REPON.git
 rm -rf try
